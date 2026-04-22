@@ -54,7 +54,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     const img = await capture();
     if (img) {
-      await chrome.storage.local.set({ img1: img });
+      await chrome.storage.local.set({ 
+        img1: img,
+        dpr1: window.devicePixelRatio 
+      });
     }
     
     cap1.disabled = false;
@@ -69,7 +72,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     const img = await capture();
     if (img) {
-      await chrome.storage.local.set({ img2: img });
+      await chrome.storage.local.set({ 
+        img2: img,
+        dpr2: window.devicePixelRatio 
+      });
     }
     
     cap2.disabled = false;
@@ -77,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   clear.onclick = async () => {
-    await chrome.storage.local.remove(['img1', 'img2']);
+    await chrome.storage.local.remove(['img1', 'img2', 'dpr1', 'dpr2']);
     updateUI({});
   };
 

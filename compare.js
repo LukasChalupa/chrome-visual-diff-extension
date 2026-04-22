@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  const data = await chrome.storage.local.get(['img1', 'img2']);
+  const data = await chrome.storage.local.get(['img1', 'img2', 'dpr1', 'dpr2']);
   
   if (!data.img1 || !data.img2) {
     alert('Missing images. Please use the extension popup to capture both base and new screenshots.');
@@ -16,10 +16,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Sync widths once base image loads in case of resolution differences
   imgBase.onload = () => {
-    imgNewSlider.style.width = imgBase.width + 'px';
-    imgNewSlider.style.height = imgBase.height + 'px';
-    imgNewOpacity.style.width = imgBase.width + 'px';
-    imgNewOpacity.style.height = imgBase.height + 'px';
+    const dpr = data.dpr1 || window.devicePixelRatio || 1;
+    const width = imgBase.naturalWidth / dpr;
+    const height = imgBase.naturalHeight / dpr;
+
+    imgBase.style.width = width + 'px';
+    imgBase.style.height = height + 'px';
+    imgNewSlider.style.width = width + 'px';
+    imgNewSlider.style.height = height + 'px';
+    imgNewOpacity.style.width = width + 'px';
+    imgNewOpacity.style.height = height + 'px';
   };
 
   const radios = document.querySelectorAll('input[name="mode"]');
