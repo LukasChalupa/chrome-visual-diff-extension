@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Diff — Privacy Policy</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 680px;
+      margin: 60px auto;
+      padding: 0 24px 80px;
+      color: #1a1a1a;
+      line-height: 1.7;
+    }
+    h1 { font-size: 1.6rem; margin-bottom: 4px; }
+    h2 { font-size: 1.05rem; margin-top: 2rem; margin-bottom: 6px; }
+    p, li { font-size: 0.97rem; color: #333; }
+    ul { padding-left: 1.4em; }
+    .meta { color: #888; font-size: 0.87rem; margin-bottom: 2.5rem; }
+    a { color: #0066cc; }
+  </style>
+</head>
+<body>
+  <h1>Privacy Policy</h1>
+  <p class="meta">Visual Diff Chrome Extension &mdash; Last updated: April 2026</p>
+
+  <p>Visual Diff is a browser extension that lets you capture and compare screenshots of browser tabs. This page explains what data the extension accesses and how it is handled.</p>
+
+  <h2>Data collected</h2>
+  <p>The extension captures screenshots of the currently active browser tab when you explicitly click the capture button. No other data is collected.</p>
+
+  <h2>Data storage</h2>
+  <p>Screenshots are stored locally on your device using <code>chrome.storage.local</code>. They remain on your device and are never transmitted to any server, third party, or external service.</p>
+
+  <h2>Data sharing</h2>
+  <p>No data is shared with anyone. The extension has no backend, no analytics, and no network requests.</p>
+
+  <h2>Permissions used</h2>
+  <ul>
+    <li><strong>activeTab</strong> — to capture a screenshot of the tab you are currently viewing.</li>
+    <li><strong>storage / unlimitedStorage</strong> — to save the two screenshots locally between sessions.</li>
+  </ul>
+
+  <h2>Data deletion</h2>
+  <p>You can delete stored screenshots at any time by clicking <strong>Clear</strong> in the extension popup, or by removing the extension from Chrome.</p>
+
+  <h2>Contact</h2>
+  <p>If you have any questions, open an issue on <a href="https://github.com/LukasChalupa/chrome-visual-diff-extension">GitHub</a>.</p>
+</body>
+</html>
