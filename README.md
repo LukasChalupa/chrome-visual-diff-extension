@@ -1,40 +1,33 @@
-# Visual Diff Tooling
+# Visual Diff — Chrome Extension
 
-This directory contains two main tools for visual regression:
+A Chrome extension for manually comparing two screenshots side by side. Useful for visual regression testing during development.
 
-1.  **Chrome Extension**: A manual tool for developers to overlay and compare screenshots in the browser via a slider or opacity.
-2.  **CLI Utility (`vcheck.sh`)**: An automated script for agents (or developers) to capture snapshots and compare them programmatically.
+## How it works
 
-## Using the CLI Utility
+1. Open the popup and click **Capture Base (1)** to snapshot the current tab.
+2. Make your changes (navigate, resize, tweak CSS, etc.).
+3. Click **Capture New (2)** to take a second snapshot.
+4. Click **Compare** — a comparison page opens with two modes:
+   - **Opacity** — overlay the new image on top of the base with adjustable transparency.
+   - **Slider** — drag a vertical divider to reveal base vs. new side by side.
 
-The CLI utility has been moved to the monorepo for easier access during development.
+Screenshots are stored in `chrome.storage.local` so they persist across popup opens. Use **Clear** to reset both captures.
 
-### Location
-`../monorepo/scripts/vcheck.sh`
+## Repository structure
 
-### 1. Capture "Before"
-Run this from the monorepo root:
-```bash
-./scripts/vcheck.sh http://localhost:3000 before
+```
+extension/     Chrome extension source (load unpacked from here)
+pack.sh        Packages extension/  into a zip ready for Chrome Web Store upload
 ```
 
-### 2. Make your changes
-Edit your code in the monorepo.
+## Development
 
-### 3. Capture "After" & Compare
-Run this from the monorepo root:
-```bash
-./scripts/vcheck.sh http://localhost:3000 after
-```
+Load the extension unpacked in Chrome:
 
-### Results
-- Snapshots are saved in the `snapshots/` directory.
-- `diff.png`: A pixel-by-pixel highlighted difference image.
-- `after.json` / `before.json`: Summaries of page text and DOM structure to detect data changes.
-- The console will output a **Difference Percentage**.
+1. Go to `chrome://extensions`
+2. Enable **Developer mode**
+3. Click **Load unpacked** and select the `extension/` folder
 
-## Speeding up the process
+## Publishing
 
-- **Headless Mode**: The script runs in headless mode by default for speed.
-- **Selective Comparison**: If you only care about a specific component, you can modify `visual-diff.mjs` to target a specific CSS selector for the screenshot.
-- **Parallel Runs**: You can run multiple instances for different routes simultaneously.
+Run `./pack.sh` from the repo root. It reads the version from `extension/manifest.json` and produces `visual-diff-v<version>.zip`, ready to upload to the Chrome Web Store.
